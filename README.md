@@ -1,5 +1,7 @@
 # Boletoman
 
+[![Build Status](https://travis-ci.org/glaucocustodio/boletoman.svg?branch=master)](https://travis-ci.org/glaucocustodio/boletoman)
+
 Gema responsável por gerar boletos em pdf para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente. Bancos suportados no momento:
 
 - Itaú (API de Registro de Cobrança)
