@@ -27,7 +27,7 @@ module Boletoman
           end
 
           def redis
-            ::Boletoman.configuration.redis
+            @redis ||= ::Boletoman.configuration.redis
           end
         end
       end

@@ -24,7 +24,7 @@ module Boletoman
           private
 
           def request
-            Faraday.new(url: url, headers: headers).send(:post) do |request|
+            ::Faraday.new(url: url, headers: headers).send(:post) do |request|
               request.body = body
             end
           end

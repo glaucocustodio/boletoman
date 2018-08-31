@@ -1,12 +1,13 @@
 require 'boletoman/services/itau/boleto/request'
 require_relative 'base'
 require_relative 'itau_formatter'
+require "bbrcobranca"
 
 module Boletoman
   module Builders
     class Itau < Base
       def instance
-        @instance ||= ::Brcobranca::Boleto::ItauAdimplere.new(
+        @instance ||= ::Bbrcobranca::Boleto::Itau.new(
           carteira: formatter.wallet,
           agencia: formatter.branch,
           conta_corrente: formatter.checking_account,

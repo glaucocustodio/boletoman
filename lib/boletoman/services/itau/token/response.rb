@@ -6,7 +6,7 @@ module Boletoman
           attr_reader :raw
 
           def initialize(raw)
-            @raw = JSON.parse(raw)
+            @raw = JSON.parse(raw.body)
           end
 
           def token

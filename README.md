@@ -1,38 +1,76 @@
 # Boletoman
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/boletoman`. To experiment with that code, run `bin/console` for an interactive prompt.
+Gema responsável por gerar boletos em pdf para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente. Bancos suportados no momento:
 
-TODO: Delete this and the text above, and describe your gem
+- Itaú (API de Registro de Cobrança)
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Adicione a linha no seu Gemfile
 
 ```ruby
 gem 'boletoman'
 ```
 
-And then execute:
+Execute:
 
     $ bundle
 
-Or install it yourself as:
+Ou instale você mesmo:
 
     $ gem install boletoman
 
-## Usage
+## Uso
 
-TODO: Write usage instructions here
+### Itau
 
-## Development
+```ruby
+builder = Boletoman::Builders::Itau.new({
+  # dados do cedente
+  transferor: {
+    name: 'EMPRESA CEDENTE LTDA',
+    document: '86.521.120/0001-50', # cnpj
+    branch: '0036', # agencia
+    checking_account: '119097', # conta
+    wallet: '109', # carteira
+  },
+  # dados do pagador
+  payer: {
+    document: '714.295.500-74', # cpf
+    name: 'JOSE SILVA',
+    street: 'Rua Edson Pereira Dias, 123',
+    city: 'Sumaré',
+    state: 'SP',
+    zip_code: '17535-004',
+  },
+  # dados do boleto
+  boleto: {
+    due_date: Date.new(2018, 12, 20),
+    nosso_numero: '10030033',
+    value: 520.80,
+  }
+})
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+pdf = builder.build
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+IO.binwrite('boleto.pdf', pdf) # salva binário no arquivo
+```
 
-## Contributing
+## Desenvolvimento
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/boletoman.
+### Testes
+
+`rake spec`
+
+### Console
+
+`bundle console`
+
+### Release
+
+Atualize o número da versão em `version.rb` e rode:
+
+`bundle exec rake release`
 
 ## License
 
