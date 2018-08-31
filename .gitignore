@@ -13,3 +13,4 @@
 .tags*
 .DS_Store
 Gemfile.lock
+*.gem
