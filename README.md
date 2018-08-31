@@ -1,6 +1,7 @@
 # Boletoman
 
 [![Build Status](https://travis-ci.org/glaucocustodio/boletoman.svg?branch=master)](https://travis-ci.org/glaucocustodio/boletoman)
+[![Coverage Status](https://coveralls.io/repos/github/glaucocustodio/boletoman/badge.svg?branch=master)](https://coveralls.io/github/glaucocustodio/boletoman?branch=master)
 
 Gema responsável por gerar boletos em pdf para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente. Bancos suportados no momento:
 
@@ -25,6 +26,24 @@ Ou instale você mesmo:
 ## Uso
 
 ### Itau
+
+Configure o acesso, se estiver no Rails, pode ser colocado em `config/initializers/boletoman.rb`:
+
+```ruby
+Boletoman.configure do |config|
+  config.env = :production # qualquer outro symbol será considerado ambiente de desenvolvimento
+  config.redis = $redis # instancia do redis para cachear o token
+
+  config.itau = Boletoman::Itau.configure do |itau_config|
+    itau_config.client_id = 'kl3j2423'
+    itau_config.client_secret = 'w2H-DWAd2lkjdwa2323ADwad3232dwa1209709lj1l098jUUy2fb9XlsrQ2'
+    itau_config.key = '4t5g129w-61wt-78e0-io70-lo10178h6711'
+    itau_config.identificator = '87987098709871'
+  end
+end
+```
+
+Passe os dados faça a chamada:
 
 ```ruby
 builder = Boletoman::Builders::Itau.new({

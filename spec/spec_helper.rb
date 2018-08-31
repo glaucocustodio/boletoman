@@ -2,6 +2,8 @@ require "bundler/setup"
 require "boletoman"
 require "webmock/rspec"
 require "fakeredis/rspec"
+require 'coveralls'
+Coveralls.wear!
 
 $redis = Redis.new
 
