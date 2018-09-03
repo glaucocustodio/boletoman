@@ -25,7 +25,6 @@ module Boletoman
           private
 
           def boleto_response
-            ap nsu
             @boleto_response ||= Boleto.new(
               ticket: ticket_response.ticket, nsu: nsu, nsu_date: data[:boleto][:issue_date]
             ).call

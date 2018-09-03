@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/glaucocustodio/boletoman.svg?branch=master)](https://travis-ci.org/glaucocustodio/boletoman)
 [![Coverage Status](https://coveralls.io/repos/github/glaucocustodio/boletoman/badge.svg?branch=master)](https://coveralls.io/github/glaucocustodio/boletoman?branch=master)
 
-Gema responsável por gerar boletos em pdf para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente. Bancos suportados no momento:
+Gema responsável por gerar boletos para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente. Bancos suportados no momento:
 
 - Itaú (API de Registro de Cobrança)
 - Santander (SOAP Cobrança Online)
@@ -40,7 +40,7 @@ Configure o acesso, se estiver no Rails, pode ser colocado em `config/initialize
 ```ruby
 Boletoman.configure do |config|
   config.env = :production # qualquer outro symbol será considerado ambiente de desenvolvimento
-  config.redis = $redis # instancia do redis para cachear o token
+  config.redis = $redis # opcional: instancia do redis para cachear o token
 
   config.itau = Boletoman::Itau.configure do |itau_config|
     itau_config.client_id = 'kl3j2423'
@@ -85,6 +85,8 @@ pdf = builder.build
 IO.binwrite('boleto-itau.pdf', pdf) # salva binário no arquivo
 ```
 
+O builder irá registrar o boleto no banco e gerar um pdf.
+
 ### Santander
 
 Chamadas implementadas:
@@ -102,6 +104,9 @@ Boletoman.configure do |config|
   config.santander = Boletoman::Santander.configure do |santander|
     santander.station = '1A2B'
     santander.covenant = '1234567'
+    # path do certificado
+    santander.certificate = 'lib/certificado.cer'
+    santander.certificate_key = 'lib/certificado.pem'
     # em caso de querer passar certificado via proxy do nginx por ex, defina:
     santander.use_certificate = false
     santander.ticket_wsdl_url = 'https://meuproxy.com/dl-ticket-services/TicketEndpointService/TicketEndpointService.wsdl'
@@ -143,12 +148,25 @@ pdf = builder.build
 IO.binwrite('boleto-santander.pdf', pdf) # salva binário no arquivo
 ```
 
-Consultando um boleto:
+O builder irá registrar o boleto no banco e gerar um pdf.
+
+#### Consultar boleto
 
 ```ruby
 Boletoman::Services::Santander::Query::Facade.new(nsu).call # NSU do banco
 
 # => { barcode: '03923500000671005391763800000098669934890101', line: '0317176380000009866399934952350000067610058901' }
+```
+
+#### Registrar boleto
+
+Se quiser apenas registrar um boleto sem gerar pdf:
+
+```ruby
+# mesmo conjunto de dados passado para o builder acima
+Boletoman::Services::Santander::Boleto::Facade.new(data).call
+
+# => { barcode: '03923500000671005391763800000098669934890101', line: '0317176380000009866399934952350000067610058901', nosso_numero: '12345678', nsu: '456789', ticket: '/XPwu7tJ6CgbTWIGNtW7gO7GH/orhi0IjLOzzs70r+RVJlOUYQJyzXpR3k30RPxv5SlJU9/mN/P+Aw0vzA/JGmLqAF...' }
 ```
 
 ## Desenvolvimento

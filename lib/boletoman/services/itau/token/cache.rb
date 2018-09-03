@@ -8,7 +8,11 @@ module Boletoman
           KEY = 'boletoman-itau-token'.freeze
 
           def fetch
-            get || set
+            if redis
+              get || set
+            else
+              request.token
+            end
           end
 
           private
