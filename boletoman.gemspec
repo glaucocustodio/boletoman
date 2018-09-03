@@ -33,5 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday'
   spec.add_dependency 'activesupport'
   spec.add_dependency 'bbrcobranca'
-  spec.add_dependency 'savon'
+  spec.add_dependency 'savon', '~> 2'
 end

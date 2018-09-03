@@ -41,6 +41,7 @@ Configure o acesso, se estiver no Rails, pode ser colocado em `config/initialize
 Boletoman.configure do |config|
   config.env = :production # qualquer outro symbol será considerado ambiente de desenvolvimento
   config.redis = $redis # opcional: instancia do redis para cachear o token
+  config.verbose = true # default é false
 
   config.itau = Boletoman::Itau.configure do |itau_config|
     itau_config.client_id = 'kl3j2423'

@@ -31,11 +31,11 @@ module Boletoman
         end
 
         def config_options
-          wsdl_config.merge(extra_config_options)
+          basic_config.merge(extra_config_options)
         end
 
-        def wsdl_config
-          { wsdl: wsdl }
+        def basic_config
+          { wsdl: wsdl, log: ::Boletoman.configuration.verbose }
         end
 
         def extra_config_options

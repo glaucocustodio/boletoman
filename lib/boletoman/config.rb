@@ -12,10 +12,11 @@ module Boletoman
   end
 
   class Configuration
-    attr_accessor :env, :redis, :itau, :santander
+    attr_accessor :env, :verbose, :redis, :itau, :santander
 
     def initialize
       @env = :dev
+      @verbose = false
     end
 
     def production_env?

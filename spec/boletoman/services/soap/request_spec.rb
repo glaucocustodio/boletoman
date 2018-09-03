@@ -68,16 +68,17 @@ RSpec.describe Boletoman::Services::Soap::Request do
 
   describe '#config_options' do
     it do
-      expect(subject).to receive(:wsdl_config).and_return(foo: :bar)
+      expect(subject).to receive(:basic_config).and_return(foo: :bar)
       expect(subject).to receive(:extra_config_options).and_return(baz: :foo)
       expect(subject.config_options).to eq(foo: :bar, baz: :foo)
     end
   end
 
-  describe '#wsdl_config' do
+  describe '#basic_config' do
     it do
+      expect(Boletoman).to receive_message_chain('configuration.verbose').and_return(false)
       expect(subject).to receive(:wsdl).and_return("whatever")
-      expect(subject.wsdl_config).to eq(wsdl: "whatever")
+      expect(subject.basic_config).to eq(wsdl: "whatever", log: false)
     end
   end
 

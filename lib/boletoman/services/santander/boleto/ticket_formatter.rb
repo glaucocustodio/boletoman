@@ -56,7 +56,7 @@ module Boletoman
           end
 
           def penalty_percentage
-            as_int(raw[:boleto][:penalty_percentage]) || '00'
+            raw[:boleto][:penalty_percentage] ? as_int(raw[:boleto][:penalty_percentage]) : '00'
           end
 
           def penalty_days
@@ -64,7 +64,7 @@ module Boletoman
           end
 
           def interest_percentage
-            as_int(raw[:boleto][:interest_percentage]) || '00'
+            raw[:boleto][:interest_percentage] ? as_int(raw[:boleto][:interest_percentage]) : '00'
           end
 
           def full_nosso_numero

@@ -100,10 +100,20 @@ RSpec.describe Boletoman::Services::Santander::Boleto::TicketFormatter do
   end
 
   describe '#penalty_percentage' do
-    let(:raw) { { boleto: { penalty_percentage: 80.58 } } }
-    it do
-      expect(subject.penalty_percentage).to eq("8058")
+    context 'value given' do
+      let(:raw) { { boleto: { penalty_percentage: 80.58 } } }
+      it do
+        expect(subject.penalty_percentage).to eq("8058")
+      end
     end
+
+    context 'value not given' do
+      let(:raw) { { boleto: {} } }
+      it do
+        expect(subject.penalty_percentage).to eq("00")
+      end
+    end
+
   end
 
   describe '#penalty_days' do
@@ -114,9 +124,18 @@ RSpec.describe Boletoman::Services::Santander::Boleto::TicketFormatter do
   end
 
   describe '#interest_percentage' do
-    let(:raw) { { boleto: { interest_percentage: 25 } } }
-    it do
-      expect(subject.interest_percentage).to eq("2500")
+    context 'value given' do
+      let(:raw) { { boleto: { interest_percentage: 25 } } }
+      it do
+        expect(subject.interest_percentage).to eq("2500")
+      end
+    end
+
+    context 'value not given' do
+      let(:raw) { { boleto: {} } }
+      it do
+        expect(subject.interest_percentage).to eq("00")
+      end
     end
   end
 
