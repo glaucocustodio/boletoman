@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Glauco Custódio"]
   spec.email         = ["glauco.custodio@gmail.com"]
 
-  spec.summary       = %q{Gema responsável por gerar boletos em pdf para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente.}
-  spec.description   = %q{Gema responsável por gerar boletos em pdf para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente.}
+  spec.summary       = %q{Gerador de boletos registrados.}
+  spec.description   = %q{Gerador de boletos registrados.}
   spec.homepage      = "https://github.com/glaucocustodio/boletoman"
   spec.license       = "MIT"
 
