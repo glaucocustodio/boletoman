@@ -6,8 +6,11 @@
 Gema responsável por gerar boletos em pdf para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente. Bancos suportados no momento:
 
 - Itaú (API de Registro de Cobrança)
+- Santander (SOAP Cobrança Online)
 
-## Installation
+Usa a gema Bbrcobranca para gerar os arquivos pdf.
+
+## Instalação
 
 Adicione a linha no seu Gemfile
 
@@ -25,7 +28,12 @@ Ou instale você mesmo:
 
 ## Uso
 
-### Itau
+### Itaú
+
+Chamadas implementadas:
+
+- geração de token autorizador
+- geração de boleto
 
 Configure o acesso, se estiver no Rails, pode ser colocado em `config/initializers/boletoman.rb`:
 
@@ -43,7 +51,7 @@ Boletoman.configure do |config|
 end
 ```
 
-Passe os dados faça a chamada:
+Passe os dados e faça a chamada:
 
 ```ruby
 builder = Boletoman::Builders::Itau.new({
@@ -74,7 +82,73 @@ builder = Boletoman::Builders::Itau.new({
 
 pdf = builder.build
 
-IO.binwrite('boleto.pdf', pdf) # salva binário no arquivo
+IO.binwrite('boleto-itau.pdf', pdf) # salva binário no arquivo
+```
+
+### Santander
+
+Chamadas implementadas:
+
+- consulta título
+- registra título
+- solicitação de ticket de segurança
+
+Configure o acesso, se estiver no Rails, pode ser colocado em `config/initializers/boletoman.rb`:
+
+```ruby
+Boletoman.configure do |config|
+  config.env = :production # qualquer outro symbol será considerado ambiente de desenvolvimento
+
+  config.santander = Boletoman::Santander.configure do |santander|
+    santander.station = '1A2B'
+    santander.covenant = '1234567'
+    # em caso de querer passar certificado via proxy do nginx por ex, defina:
+    santander.use_certificate = false
+    santander.ticket_wsdl_url = 'https://meuproxy.com/dl-ticket-services/TicketEndpointService/TicketEndpointService.wsdl'
+  end
+end
+```
+
+Passe os dados e faça a chamada:
+
+```ruby
+builder = Boletoman::Builders::Santander.new({
+  # dados do cedente
+  transferor: {
+    name: 'EMPRESA CEDENTE LTDA',
+    document: '86.521.120/0001-50', # cnpj
+    branch: '0036', # agencia
+    checking_account: '119097', # conta
+    wallet: '109', # carteira
+  },
+  # dados do pagador
+  payer: {
+    document: '714.295.500-74', # cpf
+    name: 'JOSE SILVA',
+    street: 'Rua Edson Pereira Dias, 123',
+    city: 'Sumaré',
+    state: 'SP',
+    zip_code: '17535-004',
+  },
+  # dados do boleto
+  boleto: {
+    due_date: Date.new(2018, 12, 20),
+    nosso_numero: '10030033',
+    value: 520.80,
+  }
+})
+
+pdf = builder.build
+
+IO.binwrite('boleto-santander.pdf', pdf) # salva binário no arquivo
+```
+
+Consultando um boleto:
+
+```ruby
+Boletoman::Services::Santander::Query::Facade.new(nsu).call # NSU do banco
+
+# => { barcode: '03923500000671005391763800000098669934890101', line: '0317176380000009866399934952350000067610058901' }
 ```
 
 ## Desenvolvimento

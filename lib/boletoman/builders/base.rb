@@ -1,3 +1,6 @@
+require "bbrcobranca"
+require_relative "formatter"
+
 module Boletoman
   module Builders
     class Base
@@ -17,6 +20,10 @@ module Boletoman
 
       def self.generator
         to_s.demodulize.downcase
+      end
+
+      def formatter
+        @formatter ||= Formatter.new(data)
       end
 
       # segunda via

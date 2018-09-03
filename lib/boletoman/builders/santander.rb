@@ -1,12 +1,13 @@
-require 'boletoman/services/itau/boleto/request'
+require 'boletoman/services/santander/boleto/facade'
 require_relative 'base'
 
 module Boletoman
   module Builders
-    class Itau < Base
+    class Santander < Base
       def instance
-        @instance ||= ::Bbrcobranca::Boleto::Itau.new(
+        @instance ||= Bbrcobranca::Boleto::Santander.new(
           carteira: formatter.wallet,
+          convenio: formatter.covenant,
           agencia: formatter.branch,
           conta_corrente: formatter.checking_account,
           cedente: formatter.transferor_name,
@@ -21,6 +22,8 @@ module Boletoman
           aceite: 'N',
           codigo_barras: barcode,
           nosso_numero: nosso_numero,
+          instrucao1: formatter.instruction1,
+          instrucao2: formatter.instruction2,
           instrucao3: formatter.instruction3
         )
       end
@@ -28,15 +31,15 @@ module Boletoman
       private
 
       def barcode
-        boleto_data.barcode
+        duplicate? ? data[:boleto][:barcode] : remote_response[:barcode]
       end
 
       def nosso_numero
-        boleto_data.nosso_numero
+        duplicate? ? data[:boleto][:nosso_numero] : remote_response[:nosso_numero]
       end
 
-      def boleto_data
-        @boleto_data ||= ::Boletoman::Services::Itau::Boleto::Request.new(data).call
+      def remote_response
+        @remote_response ||= ::Boletoman::Services::Santander::Boleto::Facade.new(data).call
       end
     end
   end

@@ -26,8 +26,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "fakeredis"
+  spec.add_development_dependency "pry"
+  spec.add_development_dependency "timecop"
+  spec.add_development_dependency "awesome_print"
 
   spec.add_dependency 'faraday'
   spec.add_dependency 'activesupport'
   spec.add_dependency 'bbrcobranca'
+  spec.add_dependency 'savon'
 end

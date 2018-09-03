@@ -26,7 +26,7 @@ RSpec.describe Boletoman::Builders::Itau do
     end
 
     it do
-      expect(Boletoman::Builders::ItauFormatter).to receive(:new).with(data).and_return(formatter)
+      allow(subject).to receive(:formatter).and_return(formatter)
       expect(Boletoman::Services::Itau::Boleto::Request).to(
         receive(:new).with(data).and_return(request)
       )
