@@ -5,8 +5,8 @@
 
 Gema responsável por gerar boletos para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente. Bancos suportados no momento:
 
-- Itaú (API de Registro de Cobrança)
-- Santander (SOAP Cobrança Online)
+- Itaú (via API de Registro de Cobrança)
+- Santander (via SOAP Cobrança Online)
 
 Usa a gema Bbrcobranca para gerar os arquivos pdf.
 
