@@ -73,6 +73,10 @@ module Boletoman
         raw[:boleto][:nosso_numero]
       end
 
+      def acceptance
+        raw[:boleto][:acceptance] || 'N'
+      end
+
       private
 
       def full_address_for(payer)

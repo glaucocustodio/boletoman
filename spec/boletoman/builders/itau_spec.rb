@@ -17,7 +17,10 @@ RSpec.describe Boletoman::Builders::Itau do
         payer_address: 'payer_address',
         value: 'value',
         due_date: 'due_date',
-        instruction3: 'instruction3'
+        instruction1: 'instruction1',
+        instruction2: 'instruction2',
+        instruction3: 'instruction3',
+        acceptance: 'N'
       )
     end
     let(:request) { double(:request) }
@@ -48,6 +51,8 @@ RSpec.describe Boletoman::Builders::Itau do
         aceite: 'N',
         codigo_barras: 'barcode',
         nosso_numero: 'nosso_numero',
+        instrucao1: 'instruction1',
+        instrucao2: 'instruction2',
         instrucao3: 'instruction3'
       ).and_return(:result)
 

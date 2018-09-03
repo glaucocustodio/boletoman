@@ -17,6 +17,9 @@ RSpec.describe Boletoman::Services::Santander::Boleto::Ticket do
         due_date: "20022018",
         issue_date: "15022018",
         value: "20047",
+        penalty_percentage: '00',
+        penalty_days: '00',
+        interest_percentage: '00',
         message: "sou uma msg"
       )
     end
@@ -102,19 +105,15 @@ RSpec.describe Boletoman::Services::Santander::Boleto::Ticket do
               },
               {
                 key: 'TITULO.PC-MULTA',
-                value: '200'
+                value: '00'
               },
               {
                 key: 'TITULO.QT-DIAS-MULTA',
-                value: '01'
+                value: '00'
               },
               {
                 key: 'TITULO.PC-JURO',
-                value: '100'
-              },
-              {
-                key: 'TITULO.TP-PROTESTO',
-                value: 0
+                value: '00'
               },
               {
                 key: 'MENSAGEM',

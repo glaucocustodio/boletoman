@@ -52,7 +52,19 @@ module Boletoman
           end
 
           def value
-            raw[:boleto][:value].truncate(2).to_s.remove('.')
+            as_int(raw[:boleto][:value])
+          end
+
+          def penalty_percentage
+            as_int(raw[:boleto][:penalty_percentage]) || '00'
+          end
+
+          def penalty_days
+            raw[:boleto][:penalty_days] || '00'
+          end
+
+          def interest_percentage
+            as_int(raw[:boleto][:interest_percentage]) || '00'
           end
 
           def full_nosso_numero
@@ -66,6 +78,12 @@ module Boletoman
 
           def message
             raw[:message]
+          end
+
+          private
+
+          def as_int(value)
+            ("%.2f" % value).remove('.')
           end
         end
       end

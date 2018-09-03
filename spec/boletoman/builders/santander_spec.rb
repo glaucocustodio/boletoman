@@ -20,6 +20,7 @@ RSpec.describe Boletoman::Builders::Santander do
         payer_address: 'Rua x, Bairro y - Sumaré / SP - 123456',
         value: 200,
         due_date: Date.new(2018, 10, 30),
+        acceptance: 'N',
         instruction1: 'santander instruction 1',
         instruction2: 'santander instruction 2',
         instruction3: 'santander instruction 3'

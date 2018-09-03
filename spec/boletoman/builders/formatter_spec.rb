@@ -136,4 +136,22 @@ RSpec.describe Boletoman::Builders::Formatter do
       expect(subject.nosso_numero).to eq('nosso_numero')
     end
   end
+
+  describe '#acceptance' do
+    context 'not given' do
+      let(:raw) { { boleto: { acceptance: nil } } }
+
+      it do
+        expect(subject.acceptance).to eq('N')
+      end
+    end
+
+    context 'given' do
+      let(:raw) { { boleto: { acceptance: 'S' } } }
+
+      it do
+        expect(subject.acceptance).to eq('S')
+      end
+    end
+  end
 end

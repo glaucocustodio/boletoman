@@ -83,19 +83,15 @@ module Boletoman
                     },
                     {
                       key: 'TITULO.PC-MULTA',
-                      value: '200'
+                      value: formatter.penalty_percentage
                     },
                     {
                       key: 'TITULO.QT-DIAS-MULTA',
-                      value: '01'
+                      value: formatter.penalty_days
                     },
                     {
                       key: 'TITULO.PC-JURO',
-                      value: '100'
-                    },
-                    {
-                      key: 'TITULO.TP-PROTESTO',
-                      value: 0
+                      value: formatter.interest_percentage
                     },
                     {
                       key: 'MENSAGEM',

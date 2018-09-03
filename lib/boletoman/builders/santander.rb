@@ -19,7 +19,7 @@ module Boletoman
           sacado_endereco: formatter.payer_address,
           valor: formatter.value,
           data_vencimento: formatter.due_date,
-          aceite: 'N',
+          aceite: formatter.acceptance,
           codigo_barras: barcode,
           nosso_numero: nosso_numero,
           instrucao1: formatter.instruction1,
