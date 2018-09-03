@@ -77,6 +77,7 @@ builder = Boletoman::Builders::Itau.new({
     due_date: Date.new(2018, 12, 20),
     nosso_numero: '10030033',
     value: 520.80,
+    acceptance: 'S' # aceite
   }
 })
 
@@ -140,6 +141,7 @@ builder = Boletoman::Builders::Santander.new({
     due_date: Date.new(2018, 12, 20),
     nosso_numero: '10030033',
     value: 520.80,
+    acceptance: 'S' # aceite
   }
 })
 
@@ -184,6 +186,10 @@ Boletoman::Services::Santander::Boleto::Facade.new(data).call
 Atualize o número da versão em `version.rb` e rode:
 
 `bundle exec rake release`
+
+## TODO
+
+- remover alguns valores hard coded no gerador Itaú como `juros`, `multa`, `grupo_desconto`, `indicador_pagamento_parcial` e `recebimento_divergente` (eu ainda não precisei de outros)
 
 ## License
 

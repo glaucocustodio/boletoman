@@ -22,7 +22,7 @@ module Boletoman
                 conta_beneficiario: transferor_account,
                 digito_verificador_conta_beneficiario: transferor_account_digit
               },
-              titulo_aceite: 'N',
+              titulo_aceite: acceptance,
               pagador: {
                 cpf_cnpj_pagador: payer_document,
                 nome_pagador: payer_name,
@@ -125,6 +125,10 @@ module Boletoman
 
           def value
             (data[:boleto][:value].round(2) * 100).truncate.to_s.rjust(16, '0')
+          end
+
+          def acceptance
+            data[:boleto][:acceptance] || 'N'
           end
 
           def issue_date

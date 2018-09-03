@@ -21,7 +21,8 @@ RSpec.describe Boletoman::Services::Itau::Boleto::Formatter do
         boleto: {
           nosso_numero: '4',
           due_date: Date.new(2018, 7, 27),
-          value: 180.51
+          value: 180.51,
+          acceptance: 'S'
         }
       }
     end
@@ -41,7 +42,7 @@ RSpec.describe Boletoman::Services::Itau::Boleto::Formatter do
             conta_beneficiario: '0011909',
             digito_verificador_conta_beneficiario: '7'
           },
-          titulo_aceite: 'N',
+          titulo_aceite: 'S',
           pagador: {
             cpf_cnpj_pagador: '03894613009',
             nome_pagador: "Jose Silvaaabbbccccdddeeffgghh",
