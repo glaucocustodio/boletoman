@@ -1,3 +1,7 @@
+### 0.0.4 (10/09/2018)
+
+* Adiciona classe `Boleto` para representar boleto gerado
+
 ### 0.0.3 (03/09/2018)
 
 * Adiciona opção `verbose` que permite logar xmls do savon

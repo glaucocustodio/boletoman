@@ -82,9 +82,11 @@ builder = Boletoman::Builders::Itau.new({
   }
 })
 
-pdf = builder.build
+boleto = builder.build
 
-IO.binwrite('boleto-itau.pdf', pdf) # salva binário no arquivo
+IO.binwrite('boleto-itau.pdf', boleto.pdf) # salva binário no arquivo
+
+# outros métodos disponíveis: boleto.line, boleto.barcode, boleto.nosso_numero
 ```
 
 O builder irá registrar o boleto no banco e gerar um pdf.
@@ -146,9 +148,9 @@ builder = Boletoman::Builders::Santander.new({
   }
 })
 
-pdf = builder.build
+boleto = builder.build
 
-IO.binwrite('boleto-santander.pdf', pdf) # salva binário no arquivo
+IO.binwrite('boleto-santander.pdf', boleto.pdf) # salva binário no arquivo
 ```
 
 O builder irá registrar o boleto no banco e gerar um pdf.

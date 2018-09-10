@@ -11,7 +11,7 @@ module Boletoman
       end
 
       def build
-        instance.to_pdf
+        ::Boletoman::Boleto.new(instance)
       end
 
       def instance

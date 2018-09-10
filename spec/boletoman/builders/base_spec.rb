@@ -7,8 +7,8 @@ RSpec.describe Boletoman::Builders::Base do
 
     it do
       expect(subject).to receive(:instance).and_return(instance)
-      expect(instance).to receive(:to_pdf).and_return(:pdf)
-      expect(subject.build).to eq(:pdf)
+      expect(Boletoman::Boleto).to receive(:new).with(instance).and_return(:result)
+      expect(subject.build).to eq(:result)
     end
   end
 
