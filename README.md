@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/glaucocustodio/boletoman.svg?branch=master)](https://travis-ci.org/glaucocustodio/boletoman)
 [![Coverage Status](https://coveralls.io/repos/github/glaucocustodio/boletoman/badge.svg?branch=master)](https://coveralls.io/github/glaucocustodio/boletoman?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6a6e93fd235ef8aa1a8a/maintainability)](https://codeclimate.com/github/glaucocustodio/boletoman/maintainability)
 
 Gema responsável por gerar boletos para bancos brasileiros que requerem chamada a serviços web para obter o código de barras previamente. Bancos suportados no momento:
 
