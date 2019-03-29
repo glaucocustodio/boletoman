@@ -9,7 +9,7 @@ Gema responsável por gerar boletos para bancos brasileiros que requerem chamada
 - Itaú (via API de Registro de Cobrança)
 - Santander (via SOAP Cobrança Online)
 
-Usa a gema Bbrcobranca para gerar os arquivos pdf.
+Usa a gema [Bbrcobranca](https://github.com/adimplere/bbrcobranca) para gerar os arquivos pdf.
 
 ## Instalação
 
